@@ -1,0 +1,97 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! ✨
+
+        Please provide as much detail as possible to help us understand your request.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🤔 Problem Statement
+      description: What problem does this feature solve?
+      placeholder: Describe the problem you're trying to solve...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: Describe your proposed solution
+      placeholder: Describe what you'd like to happen...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 📂 Category
+      description: What type of feature is this?
+      options:
+        - New MCP Tool
+        - API Enhancement
+        - Data Source Addition
+        - Performance Improvement
+        - UI/UX Enhancement
+        - Documentation
+        - Developer Experience
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🎯 Priority
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would be helpful
+        - High - Important for my use case
+        - Critical - Blocking my workflow
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives Considered
+      description: Have you considered any alternative solutions?
+      placeholder: Describe alternatives you've considered...
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: 📋 Usage Examples
+      description: How would you use this feature?
+      placeholder: |
+        Example usage:
+        ```javascript
+        // Your code example here
+        ```
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: 📊 Impact Areas
+      description: Which areas would this feature affect?
+      options:
+        - label: MCP Server code
+        - label: API integration
+        - label: DXT bundle size
+        - label: Performance
+        - label: Documentation
+        - label: Testing requirements
+        - label: Breaking changes
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📝 Additional Context
+      description: Any other context or screenshots about the feature request
+      placeholder: Add any other context, mockups, or examples...

@@ -1,0 +1,113 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with the Financial Data MCP
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! 🐛
+
+        Before submitting, please check if a similar issue already exists.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐛 Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Install DXT bundle...
+        2. Call tool '...'
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Expected Behavior
+      description: What should have happened?
+      placeholder: Describe the expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Actual Behavior
+      description: What actually happened?
+      placeholder: Describe what actually happened...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: 🔧 Component
+      description: Which component is affected?
+      options:
+        - MCP Server
+        - DXT Bundle
+        - API Integration
+        - Documentation
+        - Build Process
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 📦 Version
+      description: Which version are you using?
+      placeholder: v2.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: 💻 Platform
+      description: What platform are you using?
+      options:
+        - macOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+
+  - type: dropdown
+    id: claude_version
+    attributes:
+      label: 🤖 Claude Desktop Version
+      description: Which Claude Desktop version?
+      options:
+        - Latest
+        - 0.10.x
+        - 0.9.x
+        - Other (specify in additional context)
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 Error Logs
+      description: If applicable, add error logs or console output
+      placeholder: Paste any error messages or logs here...
+      render: text
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📝 Additional Context
+      description: Add any other context about the problem here
+      placeholder: Any additional information...

@@ -1,0 +1,137 @@
+name: 🚀 Build and Release DXT
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g., v2.1.0)'
+        required: true
+        type: string
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 🛒 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build DXT bundle
+        run: |
+          chmod +x build-dxt.sh
+          ./build-dxt.sh
+
+      - name: 📋 Get version and release info
+        id: release_info
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG_NAME="${{ github.event.inputs.tag }}"
+          fi
+
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "tag_name=${TAG_NAME}" >> $GITHUB_OUTPUT
+          echo "dxt_versioned=financial-data-mcp-v${VERSION}.dxt" >> $GITHUB_OUTPUT
+          echo "dxt_latest=financial-data-mcp.dxt" >> $GITHUB_OUTPUT
+
+      - name: 🧪 Test DXT bundle
+        run: |
+          echo "🧪 Testing DXT bundle integrity..."
+          if [ -f "dist/${{ steps.release_info.outputs.dxt_versioned }}" ]; then
+            echo "✅ Versioned DXT exists"
+            unzip -t "dist/${{ steps.release_info.outputs.dxt_versioned }}"
+          else
+            echo "❌ Versioned DXT missing"
+            exit 1
+          fi
+
+          if [ -f "dist/${{ steps.release_info.outputs.dxt_latest }}" ]; then
+            echo "✅ Latest DXT exists"
+            unzip -t "dist/${{ steps.release_info.outputs.dxt_latest }}"
+          else
+            echo "❌ Latest DXT missing"
+            exit 1
+          fi
+
+      - name: 📄 Generate release notes
+        id: release_notes
+        run: |
+          if [ -f "RELEASE_NOTES.md" ]; then
+            echo "Using existing RELEASE_NOTES.md"
+            cp RELEASE_NOTES.md release_notes_temp.md
+          else
+            echo "Generating release notes..."
+            cat > release_notes_temp.md << EOF
+          # Release ${{ steps.release_info.outputs.tag_name }}
+
+          ## 🚀 What's New
+
+          - Updated Financial Data MCP
+          - Version ${{ steps.release_info.outputs.version }}
+          - Complete historical data for PETR4 and VALE3
+          - Production API integration
+
+          ## 📦 Installation
+
+          **One-Click Download:**
+          \`\`\`bash
+          curl -L https://github.com/${{ github.repository }}/releases/download/${{ steps.release_info.outputs.tag_name }}/financial-data-mcp.dxt -o financial-data-mcp.dxt
+          \`\`\`
+
+          ## 🔗 Links
+
+          - **API Docs:** https://financialbreakfast-production.up.railway.app/api/docs
+          - **Health Check:** https://financialbreakfast-production.up.railway.app/api/health
+
+          ---
+          🤖 **Auto-generated release**
+          EOF
+          fi
+
+          # Set multiline output
+          {
+            echo 'notes<<EOF'
+            cat release_notes_temp.md
+            echo EOF
+          } >> $GITHUB_OUTPUT
+
+      - name: 🏷️ Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.release_info.outputs.tag_name }}
+          name: ${{ steps.release_info.outputs.tag_name }} - Financial Data MCP
+          body: ${{ steps.release_notes.outputs.notes }}
+          files: |
+            dist/${{ steps.release_info.outputs.dxt_versioned }}
+            dist/${{ steps.release_info.outputs.dxt_latest }}
+          draft: false
+          prerelease: false
+
+      - name: 🎉 Success notification
+        run: |
+          echo "🎉 Release created successfully!"
+          echo "📦 DXT files uploaded:"
+          echo "   - ${{ steps.release_info.outputs.dxt_versioned }}"
+          echo "   - ${{ steps.release_info.outputs.dxt_latest }}"
+          echo ""
+          echo "🔗 Download URLs:"
+          echo "   Latest: https://github.com/${{ github.repository }}/releases/latest/download/financial-data-mcp.dxt"
+          echo "   Versioned: https://github.com/${{ github.repository }}/releases/download/${{ steps.release_info.outputs.tag_name }}/${{ steps.release_info.outputs.dxt_versioned }}"
