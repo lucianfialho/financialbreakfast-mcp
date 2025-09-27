@@ -76,11 +76,10 @@ jobs:
         run: |
           if [ -f "RELEASE_NOTES.md" ]; then
             echo "Using existing RELEASE_NOTES.md"
-            cp RELEASE_NOTES.md release_notes_temp.md
+            NOTES_CONTENT=$(cat RELEASE_NOTES.md)
           else
             echo "Generating release notes..."
-            cat > release_notes_temp.md << EOF
-          # Release ${{ steps.release_info.outputs.tag_name }}
+            NOTES_CONTENT="# Release ${{ steps.release_info.outputs.tag_name }}
 
           ## 🚀 What's New
 
@@ -102,15 +101,14 @@ jobs:
           - **Health Check:** https://financialbreakfast-production.up.railway.app/api/health
 
           ---
-          🤖 **Auto-generated release**
-          EOF
+          🤖 **Auto-generated release**"
           fi
 
-          # Set multiline output
+          # Set multiline output using new format
           {
-            echo 'notes<<EOF'
-            cat release_notes_temp.md
-            echo EOF
+            echo 'notes<<RELEASE_NOTES_EOF'
+            echo "$NOTES_CONTENT"
+            echo 'RELEASE_NOTES_EOF'
           } >> $GITHUB_OUTPUT
 
       - name: 🏷️ Create Release
