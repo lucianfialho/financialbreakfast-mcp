@@ -171,4 +171,4 @@ unzip -l "dist/${DXT_NAME}" | grep -E "(manifest\.json|package\.json|server/)" |
 
 echo ""
 log_success "🚀 Ready for GitHub release!"
-echo "   Upload to: https://github.com/lucianfialho/financial-mcp-dxt/releases"
+echo "   Upload to: https://github.com/lucianfialho/financialbreakfast-mcp/releases"

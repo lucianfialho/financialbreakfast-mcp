@@ -13,11 +13,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucianfialho/financial-mcp-dxt"
+    "url": "https://github.com/lucianfialho/financialbreakfast-mcp"
   },
   "homepage": "https://financialbreakfast-production.up.railway.app",
   "documentation": "https://financialbreakfast-production.up.railway.app/api/docs",
-  "support": "https://github.com/lucianfialho/financial-mcp-dxt/issues",
+  "support": "https://github.com/lucianfialho/financialbreakfast-mcp/issues",
   "server": {
     "type": "node",
     "entry_point": "server/index.js",
