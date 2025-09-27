@@ -3,7 +3,7 @@
   "dxt_version": "1.0.0",
   "name": "financial-data-mcp",
   "display_name": "Brazilian Financial Data API",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Access 22 periods of historical financial data (2020-2025) for Brazilian companies (PETR4, VALE3) including revenue, EBITDA, net income, CAPEX, and net debt metrics through a comprehensive API",
   "long_description": "This MCP server provides seamless access to complete historical financial data for major Brazilian companies including Petrobras (PETR4) and Vale (VALE3). Get 22 periods of quarterly financial metrics (2020-2025), time series data, and comprehensive financial analysis through simple tool calls. All data is extracted from official quarterly reports. Supports filtering by years, specific metrics, and customizable result limits. Perfect for financial analysis, research, and investment decision-making.",
   "author": {
