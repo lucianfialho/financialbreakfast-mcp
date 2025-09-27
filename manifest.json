@@ -1,0 +1,94 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/mcpb-manifest.schema.json",
+  "dxt_version": "1.0.0",
+  "name": "financial-data-mcp",
+  "display_name": "Brazilian Financial Data API",
+  "version": "2.0.0",
+  "description": "Access 22 periods of historical financial data (2020-2025) for Brazilian companies (PETR4, VALE3) including revenue, EBITDA, net income, CAPEX, and net debt metrics through a comprehensive API",
+  "long_description": "This MCP server provides seamless access to complete historical financial data for major Brazilian companies including Petrobras (PETR4) and Vale (VALE3). Get 22 periods of quarterly financial metrics (2020-2025), time series data, and comprehensive financial analysis through simple tool calls. All data is extracted from official quarterly reports. Supports filtering by years, specific metrics, and customizable result limits. Perfect for financial analysis, research, and investment decision-making.",
+  "author": {
+    "name": "Financial Breakfast",
+    "email": "support@financialapi.com",
+    "url": "https://financialbreakfast-production.up.railway.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucianfialho/financial-mcp-dxt"
+  },
+  "homepage": "https://financialbreakfast-production.up.railway.app",
+  "documentation": "https://financialbreakfast-production.up.railway.app/api/docs",
+  "support": "https://github.com/lucianfialho/financial-mcp-dxt/issues",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.js"
+      ],
+      "env": {
+        "API_BASE_URL": "${user_config.api_base_url}",
+        "API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get_companies",
+      "description": "Get list of available companies (PETR4, VALE3)"
+    },
+    {
+      "name": "get_company_details",
+      "description": "Get detailed information about a specific company"
+    },
+    {
+      "name": "get_financial_data",
+      "description": "Get comprehensive financial data with optional filters"
+    },
+    {
+      "name": "get_available_metrics",
+      "description": "Get list of available financial metrics for a company"
+    },
+    {
+      "name": "get_metric_time_series",
+      "description": "Get time series data for a specific metric"
+    }
+  ],
+  "keywords": [
+    "finance",
+    "brazilian-stocks",
+    "petrobras",
+    "vale",
+    "financial-data",
+    "quarterly-reports",
+    "revenue",
+    "ebitda",
+    "investment",
+    "analysis"
+  ],
+  "license": "MIT",
+  "user_config": {
+    "api_base_url": {
+      "type": "string",
+      "title": "API Base URL",
+      "description": "Base URL for the Financial Data API",
+      "default": "https://financialbreakfast-production.up.railway.app",
+      "required": false
+    },
+    "api_key": {
+      "type": "string",
+      "title": "API Key",
+      "description": "Your API key for authentication. Use demo keys: demo-key-12345 (free), pro-key-67890 (pro), enterprise-key-abc (enterprise)",
+      "sensitive": true,
+      "default": "demo-key-12345",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+}
+}
