@@ -1,7 +1,7 @@
 {
   "name": "financial-data-mcp",
-  "version": "2.0.2",
-  "description": "MCP server for Brazilian financial data API - Access 22 periods of historical PETR4 and VALE3 financial metrics (2020-2025)",
+  "version": "2.1.0",
+  "description": "MCP server for Brazilian financial data API with semantic search - Access financial metrics and earnings call transcriptions for PETR4 and VALE3",
   "type": "module",
   "main": "server/index.js",
   "license": "MIT",
