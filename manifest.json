@@ -3,9 +3,9 @@
   "dxt_version": "1.0.0",
   "name": "financial-data-mcp",
   "display_name": "Brazilian Financial Data API",
-  "version": "2.0.2",
-  "description": "Access 22 periods of historical financial data (2020-2025) for Brazilian companies (PETR4, VALE3) including revenue, EBITDA, net income, CAPEX, and net debt metrics through a comprehensive API",
-  "long_description": "This MCP server provides seamless access to complete historical financial data for major Brazilian companies including Petrobras (PETR4) and Vale (VALE3). Get 22 periods of quarterly financial metrics (2020-2025), time series data, and comprehensive financial analysis through simple tool calls. All data is extracted from official quarterly reports. Supports filtering by years, specific metrics, and customizable result limits. Perfect for financial analysis, research, and investment decision-making.",
+  "version": "2.1.0",
+  "description": "Access financial data and semantic search for Brazilian companies (PETR4, VALE3) with AI-powered earnings call analysis, sentiment tracking, and comprehensive financial metrics",
+  "long_description": "Advanced MCP server providing financial data and semantic search capabilities for Brazilian companies Petrobras (PETR4) and Vale (VALE3). Features include: 22 periods of quarterly financial metrics (2020-2025), AI-powered semantic search in earnings call transcriptions, sentiment analysis timeline, call highlights extraction, and comprehensive financial analysis tools. Search earnings calls using natural language, track sentiment evolution, and get key insights from executive communications. Perfect for financial analysis, investment research, and AI-powered due diligence.",
   "author": {
     "name": "Financial Breakfast",
     "email": "support@financialapi.com",
@@ -52,6 +52,22 @@
     {
       "name": "get_metric_time_series",
       "description": "Get time series data for a specific metric"
+    },
+    {
+      "name": "semantic_search",
+      "description": "Search earnings call transcriptions using AI-powered semantic search"
+    },
+    {
+      "name": "search_by_topic",
+      "description": "Search earnings call segments by specific topics or keywords"
+    },
+    {
+      "name": "get_sentiment_timeline",
+      "description": "Get sentiment analysis timeline for a company across earnings calls"
+    },
+    {
+      "name": "get_call_highlights",
+      "description": "Get highlights and key insights from specific earnings calls"
     }
   ],
   "keywords": [
@@ -64,7 +80,12 @@
     "revenue",
     "ebitda",
     "investment",
-    "analysis"
+    "analysis",
+    "semantic-search",
+    "earnings-calls",
+    "sentiment-analysis",
+    "ai-powered",
+    "transcriptions"
   ],
   "license": "MIT",
   "user_config": {
